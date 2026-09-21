@@ -25,7 +25,7 @@ output:
 entropy function:
 - recieves the input
 - initialise the entropy total
-- loop through the vector and calculate each probabilities contribution and add it to the running total
+- loop through the vector and calculate each probabilities contribution and add it to the running total (-p * log base 2 * p)
 - once loop is done return the entropy total
 
 edge cases:
