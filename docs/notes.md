@@ -33,3 +33,7 @@ edge cases:
 - I wont initially care about validation and assume my inputs are real probability distributions and do that in the next stage.
 
 - Ive completed my initial implementation and created a edge case for probability of 0, now I need to do input validity and invariants
+
+Possible correctness ideas for track C:
+    - Input condition: before the calculation starts, probabilities represents a valid probability distribution.
+    - Loop invariant: during the calculation, total always equals the entropy contribution of exactly the probabilities       processed so far.
