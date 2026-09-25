@@ -1,11 +1,14 @@
 #include <vector>
 #include <cmath>
 
-double shannon_entropy(const std::vector<double>& vector ){
+double shannon_entropy(const std::vector<double>& probabilities ){
     double total = 0;
 
-    for(int i = 0; i < vector.size(); i++){
-        total += -(vector[i] * std::log2((vector[i])));
+    for(int i = 0; i < probabilities.size(); i++){
+        if probabilities[i] == 0.0{
+            continue;
+        }
+        total += -(probabilities[i] * std::log2((probabilities[i])));
     }
 
     return total;
