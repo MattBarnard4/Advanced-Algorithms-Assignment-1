@@ -31,3 +31,5 @@ entropy function:
 edge cases:
 - normally log(0) isnt defined even though a probability of 0 does work in the entropy calculation due to 0log0=0 so ill have to write an edge case maybe at the start at the for loop if i = 0...
 - I wont initially care about validation and assume my inputs are real probability distributions and do that in the next stage.
+
+- Ive completed my initial implementation and created a edge case for probability of 0, now I need to do input validity and invariants
