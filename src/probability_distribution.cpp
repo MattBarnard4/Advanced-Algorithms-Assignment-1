@@ -23,3 +23,10 @@ bool is_valid_distribution(const std::vector<double>& probabilities){
     }
     return true;
 }
+
+double is_valid_alpha(const double& a){
+    if (a < 0){
+        return false;
+    }
+    return true;
+}
