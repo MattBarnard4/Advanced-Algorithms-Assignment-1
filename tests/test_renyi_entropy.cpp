@@ -1,8 +1,10 @@
 #include "../src/renyi_entropy.hpp"
+#include "../src/shannon_entropy.hpp"
 #include <cassert>
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 static bool approximately_equal(double a, double b, double tolerance = 1e-9)
 {
@@ -170,6 +172,70 @@ int main() {
         assert(threw_exception);
     }
 
+    {
+        std::vector<double> p = {0.7, 0.2, 0.08, 0.02};
+
+        std::vector<double> alphas = {
+            0.9,
+            0.99,
+            0.999,
+            0.999999,
+            0.99999999,
+            1.00000001,
+            1.000001,
+            1.001,
+            1.01,
+            1.1
+        };
+
+        double shannon = shannon_entropy(p);
+
+        std::cout << std::setprecision(15);
+
+        std::cout << "\nShannon entropy: " << shannon << "\n\n";
+
+        for (double alpha : alphas) {
+            double renyi = renyi_entropy(p, alpha);
+            double difference = std::abs(renyi - shannon);
+
+            std::cout
+                << "alpha = " << alpha
+                << " | Renyi = " << renyi
+                << " | difference = " << difference
+                << '\n';
+        }
+    }
+    {
+        std::vector<double> p = {0.7, 0.2, 0.08, 0.02};
+
+        double shannon = shannon_entropy(p);
+
+        std::vector<double> alphas = {
+            1.0 - 1e-8,
+            1.0 - 1e-10,
+            1.0 - 1e-12,
+
+            1.0 + 1e-8,
+            1.0 + 1e-10,
+            1.0 + 1e-12
+        };
+
+        std::cout << std::setprecision(17);
+
+        std::cout << "\nTesting very close to alpha = 1\n";
+        std::cout << "Shannon entropy = " << shannon << "\n\n";
+
+        for (double alpha : alphas) {
+            double renyi = renyi_entropy(p, alpha);
+            double difference = std::abs(renyi - shannon);
+
+            std::cout
+                << "alpha = " << alpha
+                << " | Renyi = " << renyi
+                << " | difference = " << difference
+                << '\n';
+        }
+    }
 
     std::cout << "All Renyi entropy tests passed.\n";
 

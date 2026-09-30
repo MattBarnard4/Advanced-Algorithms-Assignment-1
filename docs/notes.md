@@ -70,3 +70,34 @@ This helped backup that Renyi's parameter matters. The underlying probability di
 Renyi invariant
 
 reordering the probabilities produced the same entropy, which is expected because entropy should depend on the probability values and not on the ordering of outcomes.
+
+As I examine these results I now want to investigate my finding further by comparing the shannon entropy of a distribution to the reny entropy of that same distribution with a range of alphas that resemble as a -> 1.
+
+Results from above: 
+
+Shannon entropy: 1.22897245893578
+
+alpha = 0.9 | Renyi = 1.28165957456763 | difference = 0.0526871156318538
+alpha = 0.99 | Renyi = 1.23402943484138 | difference = 0.00505697590560183
+alpha = 0.999 | Renyi = 1.22947609391399 | difference = 0.00050363497821504
+alpha = 0.999999 | Renyi = 1.22897296237605 | difference = 5.03440272137112e-07
+alpha = 0.99999999 | Renyi = 1.22897246313587 | difference = 4.20009538260047e-09
+alpha = 1.00000001 | Renyi = 1.22897245521505 | difference = 3.72072439525084e-09
+alpha = 1.000001 | Renyi = 1.22897195554659 | difference = 5.03389189665526e-07
+alpha = 1.001 | Renyi = 1.22846928095554 | difference = 0.000503177980237579
+alpha = 1.01 | Renyi = 1.22396118280133 | difference = 0.00501127613444385
+alpha = 1.1 | Renyi = 1.18085486635685 | difference = 0.0481175925789212
+
+this demonstrates as alpha approaches 1 its closer to normal shannon entropy and the further away the alpha from 1 the bigger the difference. next ill do even closer to 1 to push it harder.
+
+
+Testing very close to alpha = 1
+Shannon entropy = 1.2289724589357756
+
+alpha = 0.99999998999999995 | Renyi = 1.2289724631358709 | difference = 4.2000953826004661e-09
+alpha = 0.99999999989999999 | Renyi = 1.2289720524651173 | difference = 4.0647065824295225e-07
+alpha = 0.99999999999900002 | Renyi = 1.228861591395072 | difference = 0.00011086754070355198
+alpha = 1.0000000099999999 | Renyi = 1.2289724552150512 | difference = 3.7207243952508406e-09
+alpha = 1.0000000001 | Renyi = 1.2289736542829279 | difference = 1.1953471523717951e-06
+alpha = 1.0000000000010001 | Renyi = 1.2290454866548202 | difference = 7.3027719044604922e-05
+

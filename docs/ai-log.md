@@ -9,3 +9,5 @@ INFORMATION (Renyi), to further my understanding and develop my own ideas to exp
 - after my own intial implementation and in my main.cpp i tested it with one case, I got ai to write me some test cases to see if my solution can handle all test cases for normal shannon entropy before I move on to adding Renyi.
 
 - get ai to create an extra 9 test cases for base Renyi implementation 
+
+- ai writes list of alphas for me to use in test case comparing the shannon entropy of a distribution to the reny entropy of that same distribution with a range of alphas that resemble as a -> 1.
