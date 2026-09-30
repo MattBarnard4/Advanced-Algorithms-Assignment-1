@@ -13,3 +13,5 @@ INFORMATION (Renyi), to further my understanding and develop my own ideas to exp
 - ai writes list of alphas for me to use in test case comparing the shannon entropy of a distribution to the reny entropy of that same distribution with a range of alphas that resemble as a -> 1.
 
 - got ai to write me test cases for grouping for shannon and then renyi
+
+- ask ai for c++ functions that could help with calculations that have extremely tiny values

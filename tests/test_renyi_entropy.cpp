@@ -220,6 +220,16 @@ int main() {
                 << " | difference = " << difference
                 << '\n';
         }
+        for (double alpha : alphas) {
+            double renyi = renyi_entropy_stable(p, alpha);
+            double difference = std::abs(renyi - shannon);
+
+            std::cout
+                << "alpha = " << alpha
+                << " | Stable Renyi = " << renyi
+                << " | difference = " << difference
+                << '\n';
+        }
     }
     {
         std::vector<double> p = {0.7, 0.2, 0.08, 0.02};
@@ -248,6 +258,16 @@ int main() {
             std::cout
                 << "alpha = " << alpha
                 << " | Renyi = " << renyi
+                << " | difference = " << difference
+                << '\n';
+        }
+        for (double alpha : alphas) {
+            double renyi = renyi_entropy_stable(p, alpha);
+            double difference = std::abs(renyi - shannon);
+
+            std::cout
+                << "alpha = " << alpha
+                << " | Stable Renyi = " << renyi
                 << " | difference = " << difference
                 << '\n';
         }
