@@ -37,3 +37,36 @@ edge cases:
 Possible correctness ideas for track C:
     - Input condition: before the calculation starts, probabilities represents a valid probability distribution.
     - Loop invariant: during the calculation, total always equals the entropy contribution of exactly the probabilities       processed so far.
+
+## initial Renyi testing
+
+Ive now tested the Renyi implementation at alpha = 0, 1 and 2 to verify every part of the function.
+
+For alpha = 0, the implementation correctly calculated entropy from
+the number of non-zero probabilities.
+
+For alpha = 1, the function returned the Shannon entropy implementation,
+which is consistent with Shannon entropy being the limiting case of
+Renyi entropy as alpha approaches 1.
+
+For uniform probability distributions, changing alpha did not change
+the entropy. For example, (0.5, 0.5) produced 1 bit for alpha values
+0, 0.5, 1, 2 and 10. This agrees with the theoretical property that
+all Renyi orders equal log2(n) for a uniform distribution.
+
+For the non-unirform distribution (0.7, 0.2, 0.08, 0.02), entropy decreased as alpha increased.
+
+Results:
+
+alpha = 0,  2.0000
+alpha = 0.5, 1.5448
+alpha = 1, 1.2290
+alpha = 2, 0.8975
+alpha = 5, 0.6425
+alpha = 10, 0.5717
+
+This helped backup that Renyi's parameter matters. The underlying probability distribution did not change, but increasing alpha placed greater importance on the high probability outcomes. lower alpha values gave relatively more importance to the rare outcomes. This helps to the questioning of that uncertainty is not neccessarily represented by one universal value unless the properties and interpretation of the entropy measure are specified.
+
+Renyi invariant
+
+reordering the probabilities produced the same entropy, which is expected because entropy should depend on the probability values and not on the ordering of outcomes.
