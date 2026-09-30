@@ -109,3 +109,35 @@ With this and the a -> 1 experiment, I can now further investigate which mathema
 
 Next ill do tests on additivity for Shannon and Renyi and see if Shannons results uniquely distinguish it or if both entropys results are the same/similar. I do expect them to be the same the math for both satisfies the same argument that H(X, Y) = H(X) + H(Y) and Ha(X, Y) = Ha(X) + Ha(Y) (renyi), but it will show another property of shannon entropy that doesnt make it unique.
 
+Shannon additivity
+H(X) + H(Y) = 1.8112781244591329
+H(X,Y)      = 1.8112781244591329
+
+next Renyi
+
+Renyi additivity
+alpha = 0 | separate = 2 | joint = 2 | difference = 0
+alpha = 0.5 | separate = 1.8999686269529918 | joint = 1.8999686269529914 | difference = 4.4408920985006262e-16
+alpha = 1 | separate = 1.8112781244591329 | joint = 1.8112781244591329 | difference = 0
+alpha = 2 | separate = 1.6780719051126378 | joint = 1.6780719051126376 | difference = 2.2204460492503131e-16
+alpha = 5 | separate = 1.5173156656092783 | joint = 1.5173156656092783 | difference = 0
+alpha = 10 | separate = 1.4611500623142353 | joint = 1.4611500623142353 | difference = 0
+
+These results confirm that additiviy for independent distributions is preserved for both Shannon entropy and the tested Renyi orders. the tiny differencees for some orders are consistent with the floating point rounding rather than a additivity failure. This agrees with my statement that additivity does not uniquely distinguish Shannon entropy either.
+
+The last property ill test is grouping and recursivity. Shannon's grouping/recursivity idea says that making a choice all at once should give the same uncertainty as making it in stages. So ill do similar tests to compare Shannon and Renyi for this idea.
+
+Shannon grouping test
+Direct  = 1.48548
+Grouped = 1.48548
+Difference = 0
+
+Renyi grouping comparison
+alpha = 0 | direct = 1.5849625007211561 | grouped = 1.8 | difference = 0.21503749927884397
+alpha = 0.5 | direct = 1.5345348591995369 | grouped = 1.6295252477406166 | difference = 0.094990388541079662
+alpha = 1 | direct = 1.4854752972273344 | grouped = 1.4854752972273344 | difference = 0
+alpha = 2 | direct = 1.3959286763311392 | grouped = 1.2864230755241133 | difference = 0.10950560080702587
+alpha = 5 | direct = 1.219580360852937 | grouped = 1.0585227853977215 | difference = 0.16105757545521548
+alpha = 10 | direct = 1.110128053562691 | grouped = 0.95965523199475755 | difference = 0.1504728215679334
+
+These results confirmed that my Shannon implementation preserves the recursive grouping behaviour used in Shannon's axiomatic characterisation. I then applied the same grouping equation to Renyi entropy at several orders. The equality held at alpha = 1 which corresponds to shannon entropy, but generally failed for other orders. the grouping experiment therefore provides a clearer explanation of what distinguishes shannon entropy: Shannon's ordinary probability weighted recursive grouping rule is satisfied at alpha = 1, but is generally not preserved by Renyi entropy for alpha not equal to 1.

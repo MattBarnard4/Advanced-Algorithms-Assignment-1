@@ -11,3 +11,5 @@ INFORMATION (Renyi), to further my understanding and develop my own ideas to exp
 - get ai to create an extra 9 test cases for base Renyi implementation 
 
 - ai writes list of alphas for me to use in test case comparing the shannon entropy of a distribution to the reny entropy of that same distribution with a range of alphas that resemble as a -> 1.
+
+- got ai to write me test cases for grouping for shannon and then renyi

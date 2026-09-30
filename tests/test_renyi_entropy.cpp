@@ -10,21 +10,23 @@ static bool approximately_equal(double a, double b, double tolerance = 1e-9)
 {
     return std::abs(a - b) < tolerance;
 }
+
+std::vector<double> make_joint_distribution(
+    const std::vector<double>& p, const std::vector<double>& q) {
+    std::vector<double> joint;
+
+    for (double px : p){
+        for (double py: q) {
+            joint.push_back(px * py);
+        }
+    }
+    return joint;
+    }
+
 int main() {
 
 
-    std::vector<double> make_joint_distribution(
-        const std::vector<double>& p, const std::vector<double>& q)
-    {
-        std::vector<double> joint;
 
-        for (double px : p){
-            for (double py: q) {
-                joint.push_back(px * py)
-            }
-        }
-        return joint;
-    }
 
     // random non-uniform case
     {
@@ -252,6 +254,99 @@ int main() {
     }
 
     std::cout << "All Renyi entropy tests passed.\n";
+
+    {
+        std::vector<double> p = {0.5, 0.5};
+        std::vector<double> q = {0.75, 0.25};
+
+        std::vector<double> joint = make_joint_distribution(p, q);
+
+        double separate =
+            shannon_entropy(p) + shannon_entropy(q);
+
+        double combined =
+            shannon_entropy(joint);
+
+        std::cout << "\nShannon additivity\n";
+        std::cout << "H(X) + H(Y) = " << separate << '\n';
+        std::cout << "H(X,Y)      = " << combined << '\n';
+
+        assert(approximately_equal(separate, combined));
+    }
+
+    {
+        std::vector<double> p = {0.5, 0.5};
+        std::vector<double> q = {0.75, 0.25};
+
+        std::vector<double> joint = make_joint_distribution(p, q);
+
+        std::vector<double> alphas = {
+            0.0,
+            0.5,
+            1.0,
+            2.0,
+            5.0,
+            10.0
+        };
+
+        std::cout << "\nRenyi additivity\n";
+
+        for (double alpha : alphas) {
+
+            double separate =
+                renyi_entropy(p, alpha)
+                + renyi_entropy(q, alpha);
+
+            double combined =
+                renyi_entropy(joint, alpha);
+
+            std::cout
+                << "alpha = " << alpha
+                << " | separate = " << separate
+                << " | joint = " << combined
+                << " | difference = "
+                << std::abs(separate - combined)
+                << '\n';
+
+            assert(approximately_equal(separate, combined));
+        }
+    }
+
+    {
+        std::vector<double> original = {0.5, 0.3, 0.2};
+
+        std::vector<double> first_stage = {0.8, 0.2};
+        std::vector<double> second_stage = {0.625, 0.375};
+
+        std::vector<double> alphas = {
+            0.0,
+            0.5,
+            1.0,
+            2.0,
+            5.0,
+            10.0
+        };
+
+        std::cout << "\nRenyi grouping comparison\n";
+
+        for (double alpha : alphas) {
+
+            double direct =
+                renyi_entropy(original, alpha);
+
+            double grouped =
+                renyi_entropy(first_stage, alpha)
+                + 0.8 * renyi_entropy(second_stage, alpha);
+
+            std::cout
+                << "alpha = " << alpha
+                << " | direct = " << direct
+                << " | grouped = " << grouped
+                << " | difference = "
+                << std::abs(direct - grouped)
+                << '\n';
+        }
+    }
 
     return 0;
 }
