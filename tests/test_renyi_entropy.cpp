@@ -12,6 +12,20 @@ static bool approximately_equal(double a, double b, double tolerance = 1e-9)
 }
 int main() {
 
+
+    std::vector<double> make_joint_distribution(
+        const std::vector<double>& p, const std::vector<double>& q)
+    {
+        std::vector<double> joint;
+
+        for (double px : p){
+            for (double py: q) {
+                joint.push_back(px * py)
+            }
+        }
+        return joint;
+    }
+
     // random non-uniform case
     {
         std::vector<double> p = {0.5, 0.5};

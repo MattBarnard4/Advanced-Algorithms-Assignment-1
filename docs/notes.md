@@ -101,3 +101,11 @@ alpha = 1.0000000099999999 | Renyi = 1.2289724552150512 | difference = 3.7207243
 alpha = 1.0000000001 | Renyi = 1.2289736542829279 | difference = 1.1953471523717951e-06
 alpha = 1.0000000000010001 | Renyi = 1.2290454866548202 | difference = 7.3027719044604922e-05
 
+This is my best finding so far as the results are starting to deteriorate. mathematically id expect that as i get even closer to one it would be closer to normal shannon entropy where a = 1 but as i get extremly close the numerical error gets larger. This suggests that the direct formula becomes numerically unstable near alpha=1, despite the mathematical limit being well-defined as Shannon entropy.
+
+By comparing the different Renyi orders, properities of Shannon entropy that I have further investigated like permutation invariance and maximum entropy for a uniform distribution, also exist in the wider Renyi family, which suggests that these properties alone do not fully explain what makes Shannon entropy distinct.
+
+With this and the a -> 1 experiment, I can now further investigate which mathematical properties actually distinguish Shannon entropy from other Renyi orders, and also how an implementation can preserve the mathematical definition of Shannon entropy while remaining numerically reliable, linking the correctness of the mathematics to the correctness of the implementation.
+
+Next ill do tests on additivity for Shannon and Renyi and see if Shannons results uniquely distinguish it or if both entropys results are the same/similar. I do expect them to be the same the math for both satisfies the same argument that H(X, Y) = H(X) + H(Y) and Ha(X, Y) = Ha(X) + Ha(Y) (renyi), but it will show another property of shannon entropy that doesnt make it unique.
+
